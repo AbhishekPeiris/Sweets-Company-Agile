@@ -4,11 +4,11 @@ import Topbar from "../components/common/Topbar.jsx";
 
 export default function AdminLayout() {
   return (
-    <div className="min-h-screen grid grid-cols-[220px_1fr] bg-gray-50">
+    <div className="min-h-screen grid grid-cols-[220px_1fr] bg-gradient-sweet">
       <Sidebar />
       <div className="flex flex-col">
         <Topbar />
-        <main className="p-6">
+        <main className="p-8">
           <Outlet />
         </main>
       </div>

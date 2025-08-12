@@ -31,63 +31,98 @@ export default function Inventory() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-black text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+          📦 Inventory Management ✨
+        </h1>
+        <p className="text-lg font-modern text-dark-base/70">
+          Track your magical sweet stock with precision! 🍬
+        </p>
+      </div>
+
+      {/* Add Stock Form */}
       <form
         onSubmit={create}
-        className="grid gap-4 p-6 border rounded-lg shadow-lg bg-light-base border-primary-accent/20 md:grid-cols-3"
+        className="grid gap-6 p-8 border-2 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-xl border-primary-accent/30 md:grid-cols-3 animate-glow"
       >
         <Input
-          label="Product ID"
+          label="📝 Product ID"
           value={form.productId}
           onChange={(e) => setForm({ ...form, productId: e.target.value })}
           required
+          placeholder="Enter product ID..."
         />
         <Input
-          label="Quantity"
+          label="📊 Initial Quantity"
           type="number"
           value={form.quantity}
           onChange={(e) =>
             setForm({ ...form, quantity: Number(e.target.value) })
           }
           required
+          placeholder="0"
         />
         <Button type="submit" className="self-end">
-          Create Stock
+          ✨ Create Stock ✨
         </Button>
       </form>
 
-      <div className="space-y-4">
-        {rows.map((r) => (
+      {/* Inventory Items */}
+      <div className="space-y-6">
+        {rows.map((r, index) => (
           <div
             key={r._id}
-            className="flex items-center justify-between p-4 border rounded-lg shadow-lg bg-light-base border-primary-accent/20"
+            className={`flex items-center justify-between p-6 border-2 rounded-3xl shadow-xl bg-white/80 backdrop-blur-xl border-primary-accent/30 hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] ${index % 2 === 0
+                ? "hover:bg-primary-accent/5"
+                : "hover:bg-secondary-accent/5"
+              }`}
           >
-            <div>
-              <div className="font-semibold text-dark-base">
-                {r.productId?.name || r.productId}
+            <div className="space-y-2">
+              <div className="text-xl font-bold font-fancy text-dark-base">
+                🍬 {r.productId?.name || r.productId}
               </div>
-              <div className="text-sm text-dark-base/70">Qty: {r.quantity}</div>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-tertiary-accent/20 to-light-base/20">
+                <span className="text-2xl">📦</span>
+                <span className="font-semibold font-stylish text-dark-base">
+                  Stock: {r.quantity} units
+                </span>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <Button onClick={() => inc(r._id, 1)}>+1</Button>
+            <div className="flex gap-3">
+              <Button
+                onClick={() => inc(r._id, 1)}
+                className="transform bg-green-500 hover:bg-green-600 hover:scale-110"
+              >
+                ➕ Add
+              </Button>
               <Button
                 onClick={() => inc(r._id, -1)}
-                className="bg-secondary-accent hover:bg-secondary-accent/80"
+                className="transform bg-orange-500 hover:bg-orange-600 hover:scale-110"
               >
-                -1
+                ➖ Remove
               </Button>
               <Button
                 onClick={() => remove(r._id)}
-                className="bg-red-600 hover:bg-red-700"
+                className="transform bg-red-500 hover:bg-red-600 hover:scale-110"
               >
-                Delete
+                🗑️ Delete
               </Button>
             </div>
           </div>
         ))}
         {!rows.length && (
-          <div className="p-6 text-center border rounded-lg bg-light-base border-primary-accent/20">
-            <div className="text-dark-base/70">No inventory items found</div>
+          <div className="p-12 text-center border-2 rounded-3xl bg-white/80 backdrop-blur-xl border-primary-accent/30">
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-8xl animate-bounce-gentle">📦</span>
+              <span className="text-2xl font-bold text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+                No Inventory Items Yet
+              </span>
+              <span className="text-lg font-modern text-dark-base/70">
+                Create your first stock entry above! ✨
+              </span>
+            </div>
           </div>
         )}
       </div>

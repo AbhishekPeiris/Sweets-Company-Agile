@@ -6,7 +6,7 @@ import ordersService from "../../services/orders.service.js";
 
 export default function Cart() {
     const { cartItems, removeFromCart, updateQuantity, clearCart, getTotalPrice } = useCart();
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const navigate = useNavigate();
 
     const [orderForm, setOrderForm] = useState({
@@ -20,7 +20,18 @@ export default function Cart() {
     const handlePlaceOrder = async (e) => {
         e.preventDefault();
 
-        if (!user) {
+        // Check if user is logged in and has valid data
+        if (!user || !token) {
+            alert("Please login first to place an order! 🔑");
+            navigate("/login");
+            return;
+        }
+
+        // Ensure we have user ID
+        const customerId = user._id || user.id;
+        if (!customerId) {
+            console.error("User ID not found:", user);
+            alert("❌ Unable to identify user. Please login again.");
             navigate("/login");
             return;
         }
@@ -29,7 +40,7 @@ export default function Cart() {
 
         try {
             const orderData = {
-                customerId: user._id,
+                customerId: customerId,
                 items: cartItems.map(item => ({
                     productId: item._id,
                     name: item.name,
@@ -39,10 +50,14 @@ export default function Cart() {
                 contactName: orderForm.contactName,
                 contactPhone: orderForm.contactPhone,
                 address: orderForm.address,
-                notes: orderForm.notes
+                notes: orderForm.notes,
+                total: getTotalPrice()
             };
 
-            await ordersService.create(orderData);
+            console.log("Placing order with data:", orderData); // Debug log
+
+            const response = await ordersService.create(orderData);
+            console.log("Order response:", response); // Debug log
 
             clearCart();
             alert("🎉 Order placed successfully! We'll contact you soon! ✨");
@@ -50,11 +65,45 @@ export default function Cart() {
 
         } catch (error) {
             console.error("Order placement failed:", error);
-            alert("❌ Failed to place order. Please try again.");
+            const errorMessage = error.response?.data?.message || error.message || "Failed to place order. Please try again.";
+            alert(`❌ ${errorMessage}`);
         } finally {
             setIsPlacingOrder(false);
         }
     };
+
+    // Show login prompt if not authenticated
+    if (!user || !token) {
+        return (
+            <div className="min-h-screen overflow-hidden bg-gradient-sweet">
+                <div className="relative px-6 py-32">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <div className="mb-8 text-8xl animate-bounce-gentle">🔐</div>
+                        <h1 className="mb-6 text-6xl font-black text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+                            Please Login First
+                        </h1>
+                        <p className="mb-8 text-2xl font-modern text-dark-base/70">
+                            You need to be logged in to view your cart and place orders! ✨
+                        </p>
+                        <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+                            <a
+                                href="/login"
+                                className="inline-block px-12 py-6 font-fancy font-black text-2xl text-white bg-gradient-to-r from-primary-accent to-secondary-accent rounded-[2rem] shadow-2xl hover:shadow-primary-accent/50 transform hover:scale-110 transition-all duration-500 animate-glow"
+                            >
+                                🔑 Login Now ✨
+                            </a>
+                            <a
+                                href="/register"
+                                className="inline-block px-12 py-6 font-fancy font-black text-2xl text-dark-base bg-gradient-to-r from-tertiary-accent to-cream rounded-[2rem] shadow-2xl hover:shadow-tertiary-accent/50 transform hover:scale-110 transition-all duration-500 border-2 border-primary-accent/30"
+                            >
+                                ✨ Register ✨
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (cartItems.length === 0) {
         return (
