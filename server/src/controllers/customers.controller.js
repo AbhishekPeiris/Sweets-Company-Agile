@@ -1,12 +1,10 @@
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
-/**
- * Admin creates a new customer.
- * Body: { name, email, password, phone, address }
- */
 export async function createCustomer(req, res) {
-  const { name, email, password, phone, address } = req.body;
+  const { name, email, password = "Temp1234!", phone, address } = req.body;
+  if (!name || !email)
+    return res.status(400).json({ message: "Missing fields" });
 
   const exists = await User.findOne({ email });
   if (exists) return res.status(400).json({ message: "Email already in use" });
@@ -20,16 +18,11 @@ export async function createCustomer(req, res) {
     phone,
     address,
   });
-
   res
     .status(201)
     .json({ data: { id: user._id, name: user.name, email: user.email } });
 }
 
-/**
- * List customers (admin)
- * Query: ?q=search
- */
 export async function listCustomers(req, res) {
   const { q } = req.query;
   const filter = { role: "customer" };
@@ -44,7 +37,6 @@ export async function listCustomers(req, res) {
   res.json({ data: users });
 }
 
-/** Get single customer (admin) */
 export async function getCustomer(req, res) {
   const user = await User.findById(req.params.id);
   if (!user || user.role !== "customer")
@@ -52,7 +44,6 @@ export async function getCustomer(req, res) {
   res.json({ data: user });
 }
 
-/** Update customer (admin) */
 export async function updateCustomer(req, res) {
   const { name, phone, address } = req.body;
   const user = await User.findByIdAndUpdate(
@@ -65,7 +56,6 @@ export async function updateCustomer(req, res) {
   res.json({ data: user });
 }
 
-/** Delete customer (admin) – hard delete for MVP */
 export async function deleteCustomer(req, res) {
   const user = await User.findById(req.params.id);
   if (!user || user.role !== "customer")

@@ -6,14 +6,13 @@ import {
   updateCustomer,
   deleteCustomer,
 } from "../controllers/customers.controller.js";
+import { requireAuth, requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
-
-// NOTE: Add auth/role middleware when ready (e.g., requireAdmin)
-router.post("/", createCustomer);
-router.get("/", listCustomers);
-router.get("/:id", getCustomer);
-router.put("/:id", updateCustomer);
-router.delete("/:id", deleteCustomer);
+router.post("/", requireAuth, requireAdmin, createCustomer);
+router.get("/", requireAuth, requireAdmin, listCustomers);
+router.get("/:id", requireAuth, requireAdmin, getCustomer);
+router.put("/:id", requireAuth, requireAdmin, updateCustomer);
+router.delete("/:id", requireAuth, requireAdmin, deleteCustomer);
 
 export default router;

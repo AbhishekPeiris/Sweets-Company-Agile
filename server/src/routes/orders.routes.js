@@ -7,25 +7,26 @@ import {
   cancelOrder,
   deleteOrder,
 } from "../controllers/orders.controller.js";
+import { requireAuth, requireAdmin } from "../middleware/auth.js";
 
 const router = Router();
 
-// Create order (customer)
-router.post("/", createOrder);
+// create (customer)
+router.post("/", requireAuth, createOrder);
 
-// List: admin or by customerId query
-router.get("/", listOrders);
+// list: admin or own by query
+router.get("/", requireAuth, listOrders);
 
-// Detail
-router.get("/:id", getOrder);
+// detail
+router.get("/:id", requireAuth, getOrder);
 
-// Update status (admin)
-router.patch("/:id/status", updateOrderStatus);
+// admin status update
+router.patch("/:id/status", requireAuth, requireAdmin, updateOrderStatus);
 
-// Cancel (customer/admin)
-router.post("/:id/cancel", cancelOrder);
+// cancel (customer/admin)
+router.post("/:id/cancel", requireAuth, cancelOrder);
 
-// Hard delete (admin – optional)
-router.delete("/:id", deleteOrder);
+// delete (admin)
+router.delete("/:id", requireAuth, requireAdmin, deleteOrder);
 
 export default router;

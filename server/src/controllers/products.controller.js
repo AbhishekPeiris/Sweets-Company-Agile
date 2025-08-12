@@ -6,13 +6,16 @@ export async function createProduct(req, res) {
 }
 
 export async function listProducts(req, res) {
-  const { page = 1, limit = 12, category } = req.query;
+  const { page = 1, limit = 20, category, q } = req.query;
   const filter = {};
   if (category) filter.category = category;
+  if (q) filter.name = { $regex: q, $options: "i" };
+
   const docs = await Product.find(filter)
     .skip((page - 1) * limit)
     .limit(Number(limit))
     .sort({ createdAt: -1 });
+
   res.json({ data: docs });
 }
 

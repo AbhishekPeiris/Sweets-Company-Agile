@@ -7,7 +7,7 @@ const orderItemSchema = new mongoose.Schema(
       ref: "Product",
       required: true,
     },
-    name: { type: String }, // snapshot (optional)
+    name: String, // snapshot (optional)
     priceAtOrder: { type: Number, required: true, min: 0 },
     qty: { type: Number, required: true, min: 1 },
   },
@@ -34,11 +34,10 @@ const orderSchema = new mongoose.Schema(
       default: "pending",
       index: true,
     },
-    notes: { type: String },
-    // optional simple shipping/contact fields for MVP
-    contactName: { type: String },
-    contactPhone: { type: String },
-    address: { type: String },
+    notes: String,
+    contactName: String,
+    contactPhone: String,
+    address: String,
     paymentStatus: {
       type: String,
       enum: ["unpaid", "paid", "refunded"],
@@ -48,14 +47,12 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Recompute/verify total before save if not provided by service layer
+// compute total if missing
 orderSchema.pre("validate", function (next) {
-  if (!this.items?.length) return next();
-  const calc = this.items.reduce(
-    (sum, it) => sum + it.priceAtOrder * it.qty,
-    0
-  );
-  if (this.total === undefined || this.total === null) this.total = calc;
+  if (this.items?.length) {
+    const t = this.items.reduce((s, it) => s + it.priceAtOrder * it.qty, 0);
+    if (this.total == null) this.total = t;
+  }
   next();
 });
 
