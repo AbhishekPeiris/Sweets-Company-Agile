@@ -25,13 +25,17 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 bg-gray-50">
+    <div className="flex items-center justify-center min-h-screen px-4 bg-gradient-sweet relative overflow-hidden">
+      {/* Floating decorations */}
+      <div className="absolute top-20 left-10 w-24 h-24 bg-rose/30 rounded-full animate-float blur-xl"></div>
+      <div className="absolute bottom-20 right-10 w-32 h-32 bg-lavender/40 rounded-full animate-bounce-gentle blur-2xl"></div>
+
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-lg p-10 border rounded-lg shadow-lg bg-light-base border-primary-accent/20"
+        className="relative w-full max-w-lg p-12 border-4 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-2xl border-white/50 animate-glow"
       >
-        <h2 className="mb-8 text-2xl font-bold text-center text-dark-base">
-          Login to Your Account
+        <h2 className="mb-8 font-fancy text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+          ✨ Welcome Back ✨
         </h2>
         <div className="space-y-6">
           <Input
