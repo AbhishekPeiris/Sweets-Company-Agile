@@ -20,13 +20,18 @@ export default function Register() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 bg-gray-50">
+    <div className="relative flex items-center justify-center min-h-screen px-4 overflow-hidden bg-gradient-sweet">
+      {/* Floating decorations */}
+      <div className="absolute w-20 h-20 rounded-full top-16 left-12 bg-lavender/30 animate-float blur-xl"></div>
+      <div className="absolute rounded-full bottom-24 right-16 w-28 h-28 bg-rose/40 animate-bounce-gentle blur-2xl"></div>
+      <div className="absolute w-16 h-16 rounded-full top-1/2 left-20 bg-tertiary-accent/40 animate-pulse-slow blur-lg"></div>
+
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-lg p-10 border rounded-lg shadow-lg bg-light-base border-primary-accent/20"
+        className="relative w-full max-w-lg p-12 border-4 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-2xl border-white/50 animate-glow"
       >
-        <h2 className="mb-8 text-2xl font-bold text-center text-dark-base">
-          Create Your Account
+        <h2 className="mb-8 text-4xl font-black text-center text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent via-primary-accent to-rose">
+          ✨ Join Our Sweet Family ✨
         </h2>
         <div className="space-y-6">
           <Input
@@ -50,8 +55,8 @@ export default function Register() {
             required
           />
           {msg && (
-            <div className="p-3 text-sm text-green-700 border border-green-200 rounded-md bg-green-50">
-              {msg}
+            <div className="p-4 text-sm font-medium text-green-800 border-2 border-green-300 rounded-2xl bg-green-50/80 backdrop-blur-sm animate-bounce-gentle">
+              🎉 {msg} 🎉
             </div>
           )}
           <Button type="submit" className="w-full">
