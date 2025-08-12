@@ -8,6 +8,7 @@ import Catalog from "../pages/website/Catalog.jsx";
 import ProductDetails from "../pages/website/ProductDetails.jsx";
 import About from "../pages/website/About.jsx";
 import Contact from "../pages/website/Contact.jsx";
+import Cart from "../pages/website/Cart.jsx";
 
 import Login from "../pages/auth/Login.jsx";
 import Register from "../pages/auth/Register.jsx";
@@ -27,6 +28,7 @@ export default function AppRoutes() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>

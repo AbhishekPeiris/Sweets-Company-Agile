@@ -6,7 +6,7 @@ import products from "../../services/products.service.js";
 
 export default function Products() {
   const [rows, setRows] = useState([]);
-  const [form, setForm] = useState({ name: "", category: "", price: 0 });
+  const [form, setForm] = useState({ id: "",name: "", category: "", price: 0 });
 
   async function load() {
     const r = await products.list();
@@ -19,7 +19,7 @@ export default function Products() {
   async function create(e) {
     e.preventDefault();
     await products.create(form);
-    setForm({ name: "", category: "", price: 0 });
+    setForm({ id: "", name: "", category: "", price: 0 });
     load();
   }
   async function remove(id) {
@@ -27,47 +27,72 @@ export default function Products() {
     load();
   }
 
-  const cols = [
-    { key: "name", header: "Name" },
-    { key: "category", header: "Category" },
-    { key: "price", header: "Price" },
-  ];
-
   return (
-    <div className="grid gap-4">
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-black text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+          🍬 Products Management ✨
+        </h1>
+        <p className="text-lg font-modern text-dark-base/70">
+          Create and manage your magical sweet products! 🎭
+        </p>
+      </div>
+
+      {/* Add Product Form */}
       <form
         onSubmit={create}
-        className="grid gap-3 p-4 bg-white rounded md:grid-cols-4"
+        className="grid gap-6 p-8 border-2 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-xl border-primary-accent/30 md:grid-cols-4 animate-glow"
       >
         <Input
-          label="Name"
+          label="🏷️ Product Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           required
+          placeholder="Enter sweet name..."
         />
         <Input
-          label="Category"
+          label="🎭 Category"
           value={form.category}
           onChange={(e) => setForm({ ...form, category: e.target.value })}
+          placeholder="e.g., Cupcakes, Chocolates"
         />
         <Input
-          label="Price (LKR)"
+          label="💰 Price (LKR)"
           type="number"
           value={form.price}
           onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
           required
+          placeholder="0"
         />
         <Button type="submit" className="self-end">
-          Add
+          ✨ Add Product ✨
         </Button>
       </form>
 
+      {/* Products Table */}
       <DataTable
-        columns={cols}
+        columns={[
+          { key: "_id", header: "# Product ID" },
+          { key: "name", header: "🍬 Sweet Name" },
+          { key: "category", header: "🎭 Category" },
+          {
+            key: "price",
+            header: "💰 Price",
+            render: (product) => (
+              <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
+                LKR {product.price}
+              </span>
+            ),
+          },
+        ]}
         rows={rows}
         actions={(r) => (
-          <Button onClick={() => remove(r._id)} className="bg-red-600">
-            Delete
+          <Button
+            onClick={() => remove(r._id)}
+            className="transform bg-red-500 hover:bg-red-600 hover:scale-105"
+          >
+            🗑️ Delete
           </Button>
         )}
       />

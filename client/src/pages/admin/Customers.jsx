@@ -27,54 +27,94 @@ export default function Customers() {
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-black text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+          👥 Customer Management ✨
+        </h1>
+        <p className="text-lg font-modern text-dark-base/70">
+          Manage your sweet customers with love! 💖
+        </p>
+      </div>
+
+      {/* Add Customer Form */}
       <form
         onSubmit={create}
-        className="grid gap-3 p-4 bg-white rounded md:grid-cols-3"
+        className="grid gap-6 p-8 border-2 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-xl border-primary-accent/30 md:grid-cols-3 animate-glow"
       >
         <Input
-          label="Name"
+          label="✨ Customer Name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           required
+          placeholder="Enter customer name..."
         />
         <Input
-          label="Email"
+          label="📧 Email Address"
           type="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           required
+          placeholder="customer@email.com"
         />
         <Button type="submit" className="self-end">
-          Add
+          ✨ Add Customer ✨
         </Button>
       </form>
 
-      <div className="bg-white rounded shadow">
+      {/* Customers Table */}
+      <div className="border-2 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-xl border-primary-accent/30 animate-glow">
         <table className="min-w-full text-sm">
-          <thead>
-            <tr className="bg-gray-50">
-              <th className="px-3 py-2 text-left">Name</th>
-              <th className="px-3 py-2 text-left">Email</th>
-              <th className="px-3 py-2">Actions</th>
+          <thead className="border-b-2 bg-gradient-to-r from-primary-accent/20 to-secondary-accent/20 border-primary-accent/30">
+            <tr>
+              <th className="px-6 py-4 font-bold text-left font-stylish text-dark-base">
+                👤 Customer Name
+              </th>
+              <th className="px-6 py-4 font-bold text-left font-stylish text-dark-base">
+                📧 Email Address
+              </th>
+              <th className="px-6 py-4 font-bold text-center font-stylish text-dark-base">
+                ⚡ Actions
+              </th>
             </tr>
           </thead>
           <tbody>
-            {rows.map((u) => (
-              <tr key={u._id} className="border-t">
-                <td className="px-3 py-2">{u.name}</td>
-                <td className="px-3 py-2">{u.email}</td>
-                <td className="px-3 py-2 text-center">
-                  <Button onClick={() => remove(u._id)} className="bg-red-600">
-                    Delete
+            {rows.map((u, index) => (
+              <tr
+                key={u._id}
+                className={`border-b border-primary-accent/10 hover:bg-gradient-to-r hover:from-primary-accent/10 hover:to-secondary-accent/10 transition-all duration-300 ${index % 2 === 0 ? "bg-white/50" : "bg-cream/30"
+                  }`}
+              >
+                <td className="px-6 py-4 font-semibold font-modern text-dark-base">
+                  {u.name}
+                </td>
+                <td className="px-6 py-4 font-modern text-dark-base">
+                  {u.email}
+                </td>
+                <td className="px-6 py-4 text-center">
+                  <Button
+                    onClick={() => remove(u._id)}
+                    className="transform bg-red-500 hover:bg-red-600 hover:scale-105"
+                  >
+                    🗑️ Delete
                   </Button>
                 </td>
               </tr>
             ))}
             {!rows.length && (
               <tr>
-                <td colSpan="3" className="px-3 py-4 text-center text-gray-500">
-                  No customers
+                <td
+                  colSpan="3"
+                  className="px-6 py-12 text-xl text-center font-elegant text-dark-base/70"
+                >
+                  <div className="flex flex-col items-center gap-4">
+                    <span className="text-6xl animate-bounce-gentle">👥</span>
+                    <span>No sweet customers yet... ✨</span>
+                    <span className="text-sm">
+                      Add your first customer above! 💖
+                    </span>
+                  </div>
                 </td>
               </tr>
             )}
