@@ -31,10 +31,10 @@ export default function Inventory() {
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="space-y-6">
       <form
         onSubmit={create}
-        className="grid gap-3 p-4 bg-white rounded md:grid-cols-3"
+        className="grid gap-4 p-6 border rounded-lg shadow-lg bg-light-base border-primary-accent/20 md:grid-cols-3"
       >
         <Input
           label="Product ID"
@@ -56,32 +56,38 @@ export default function Inventory() {
         </Button>
       </form>
 
-      <div className="grid gap-2">
+      <div className="space-y-4">
         {rows.map((r) => (
           <div
             key={r._id}
-            className="flex items-center justify-between p-3 bg-white rounded shadow"
+            className="flex items-center justify-between p-4 border rounded-lg shadow-lg bg-light-base border-primary-accent/20"
           >
             <div>
-              <div className="font-medium">
+              <div className="font-semibold text-dark-base">
                 {r.productId?.name || r.productId}
               </div>
-              <div className="text-sm text-gray-600">Qty: {r.quantity}</div>
+              <div className="text-sm text-dark-base/70">Qty: {r.quantity}</div>
             </div>
             <div className="flex gap-2">
               <Button onClick={() => inc(r._id, 1)}>+1</Button>
-              <Button onClick={() => inc(r._id, -1)} className="bg-gray-600">
+              <Button
+                onClick={() => inc(r._id, -1)}
+                className="bg-secondary-accent hover:bg-secondary-accent/80"
+              >
                 -1
               </Button>
-              <Button onClick={() => remove(r._id)} className="bg-red-600">
+              <Button
+                onClick={() => remove(r._id)}
+                className="bg-red-600 hover:bg-red-700"
+              >
                 Delete
               </Button>
             </div>
           </div>
         ))}
         {!rows.length && (
-          <div className="p-4 text-gray-600 bg-white rounded">
-            No inventory yet.
+          <div className="p-6 text-center border rounded-lg bg-light-base border-primary-accent/20">
+            <div className="text-dark-base/70">No inventory items found</div>
           </div>
         )}
       </div>

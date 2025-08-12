@@ -34,10 +34,10 @@ export default function Products() {
   ];
 
   return (
-    <div className="grid gap-4">
+    <div className="space-y-6">
       <form
         onSubmit={create}
-        className="grid gap-3 p-4 bg-white rounded md:grid-cols-4"
+        className="grid gap-4 p-6 border rounded-lg shadow-lg bg-light-base border-primary-accent/20 md:grid-cols-4"
       >
         <Input
           label="Name"
@@ -58,7 +58,7 @@ export default function Products() {
           required
         />
         <Button type="submit" className="self-end">
-          Add
+          Add Product
         </Button>
       </form>
 
@@ -66,7 +66,7 @@ export default function Products() {
         columns={cols}
         rows={rows}
         actions={(r) => (
-          <Button onClick={() => remove(r._id)} className="bg-red-600">
+          <Button onClick={() => remove(r._id)} className="bg-red-600 hover:bg-red-700">
             Delete
           </Button>
         )}

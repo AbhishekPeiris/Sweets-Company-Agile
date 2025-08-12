@@ -4,14 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary-accent": "#FFC529",
-        "secondary-accent": "#FE724C",
-        "dark-base": "#272D2F",
-        "light-base": "#D7D7D7",
+        "primary-accent": "#fda7a6",
+        "secondary-accent": "#baa1da",
+        "dark-base": "#5e4485",
+        "light-base": "#fdf1f1",
       },
-      fontFamily: {
-        gilroy: ['Gilroy', 'sans-serif'],
-      },
+      // fontFamily: {
+      //   gilroy: ['Gilroy', 'sans-serif'],
+      // },
     },
   },
   plugins: [],

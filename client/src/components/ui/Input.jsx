@@ -1,9 +1,9 @@
 export default function Input({ label, ...props }) {
   return (
-    <label className="grid gap-1">
-      {label && <span className="text-sm text-gray-700">{label}</span>}
+    <label className="grid gap-2">
+      {label && <span className="text-sm font-medium text-dark-base">{label}</span>}
       <input
-        className="w-full px-3 py-2 border rounded focus:outline-none focus:ring"
+        className="w-full px-3 py-2 border rounded-md bg-light-base border-primary-accent/30 text-dark-base focus:outline-none focus:ring-2 focus:ring-primary-accent/50 focus:border-primary-accent"
         {...props}
       />
     </label>

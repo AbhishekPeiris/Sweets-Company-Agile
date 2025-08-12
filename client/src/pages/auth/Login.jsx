@@ -25,29 +25,39 @@ export default function Login() {
   }
 
   return (
-    <form
-      onSubmit={onSubmit}
-      className="max-w-sm p-4 mx-auto bg-white rounded shadow"
-    >
-      <h2 className="mb-3 text-lg font-semibold">Login</h2>
-      <div className="grid gap-3">
-        <Input
-          label="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <Input
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <div className="text-sm text-red-600">{error}</div>}
-        <Button type="submit">Sign in</Button>
-      </div>
-    </form>
+    <div className="flex items-center justify-center min-h-screen px-4 bg-gray-50">
+      <form
+        onSubmit={onSubmit}
+        className="w-full max-w-lg p-10 border rounded-lg shadow-lg bg-light-base border-primary-accent/20"
+      >
+        <h2 className="mb-8 text-2xl font-bold text-center text-dark-base">
+          Login to Your Account
+        </h2>
+        <div className="space-y-6">
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {error && (
+            <div className="p-3 text-sm text-red-700 border border-red-200 rounded-md bg-red-50">
+              {error}
+            </div>
+          )}
+          <Button type="submit" className="w-full">
+            Sign in
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }

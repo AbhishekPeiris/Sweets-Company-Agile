@@ -3,41 +3,62 @@ import { useAuth } from "../../context/AuthContext.jsx";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
-  const nav = "px-3 py-2 rounded hover:bg-gray-100";
+  const navLinkClass = ({ isActive }) =>
+    `px-4 py-2 rounded-md font-medium transition-colors duration-200 ${isActive
+      ? "bg-primary-accent text-dark-base"
+      : "text-dark-base hover:bg-secondary-accent hover:text-white"
+    }`;
+
   return (
-    <header className="bg-white border-b">
-      <div className="flex items-center max-w-6xl gap-3 p-3 mx-auto">
-        <Link to="/" className="font-semibold">
+    <header className="border-b shadow-sm bg-light-base border-primary-accent/30">
+      <div className="flex items-center justify-between max-w-6xl px-4 py-3 mx-auto">
+        <Link
+          to="/"
+          className="text-2xl font-bold transition-colors duration-200 text-dark-base hover:text-primary-accent"
+        >
           🍬 Sweets Company
         </Link>
-        <NavLink to="/catalog" className={nav}>
-          Catalog
-        </NavLink>
-        <NavLink to="/about" className={nav}>
-          About
-        </NavLink>
-        <NavLink to="/contact" className={nav}>
-          Contact
-        </NavLink>
-        <div className="flex items-center gap-2 ml-auto">
+
+        <nav className="items-center hidden space-x-2 md:flex">
+          <NavLink to="/catalog" className={navLinkClass}>
+            Catalog
+          </NavLink>
+          <NavLink to="/about" className={navLinkClass}>
+            About
+          </NavLink>
+          <NavLink to="/contact" className={navLinkClass}>
+            Contact
+          </NavLink>
+        </nav>
+
+        <div className="flex items-center space-x-3">
           {user ? (
             <>
-              <NavLink to="/admin" className={nav}>
+              <NavLink
+                to="/admin"
+                className="px-4 py-2 font-medium transition-colors duration-200 text-dark-base hover:text-primary-accent"
+              >
                 Admin
               </NavLink>
               <button
                 onClick={logout}
-                className="px-3 py-2 text-white bg-gray-800 rounded"
+                className="px-4 py-2 font-medium text-white transition-colors duration-200 rounded-md bg-dark-base hover:bg-secondary-accent"
               >
                 Logout
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login" className={nav}>
+              <NavLink
+                to="/login"
+                className="px-4 py-2 font-medium transition-colors duration-200 text-dark-base hover:text-secondary-accent"
+              >
                 Login
               </NavLink>
-              <NavLink to="/register" className={nav}>
+              <NavLink
+                to="/register"
+                className="px-4 py-2 font-medium transition-colors duration-200 rounded-md bg-primary-accent text-dark-base hover:bg-secondary-accent hover:text-white"
+              >
                 Register
               </NavLink>
             </>

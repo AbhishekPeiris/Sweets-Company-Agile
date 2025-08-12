@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom";
 
 const link = ({ isActive }) =>
-  `block px-3 py-2 rounded ${
-    isActive ? "bg-gray-800 text-white" : "hover:bg-gray-100"
+  `block px-3 py-2 rounded transition-colors duration-200 ${isActive
+    ? "bg-dark-base text-white"
+    : "text-dark-base hover:bg-primary-accent/20 hover:text-dark-base"
   }`;
 
 export default function Sidebar() {
   return (
-    <aside className="p-3 bg-white border-r">
-      <div className="mb-3 font-semibold">Admin</div>
-      <nav className="grid gap-1">
+    <aside className="p-4 border-r bg-light-base border-primary-accent/30">
+      <div className="mb-4 text-lg font-semibold text-dark-base">Admin Panel</div>
+      <nav className="space-y-1">
         <NavLink to="/admin" className={link}>
           Dashboard
         </NavLink>

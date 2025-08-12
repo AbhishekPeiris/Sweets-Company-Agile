@@ -27,10 +27,10 @@ export default function Customers() {
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="space-y-6">
       <form
         onSubmit={create}
-        className="grid gap-3 p-4 bg-white rounded md:grid-cols-3"
+        className="grid gap-4 p-6 border rounded-lg shadow-lg bg-light-base border-primary-accent/20 md:grid-cols-3"
       >
         <Input
           label="Name"
@@ -46,26 +46,35 @@ export default function Customers() {
           required
         />
         <Button type="submit" className="self-end">
-          Add
+          Add Customer
         </Button>
       </form>
 
-      <div className="bg-white rounded shadow">
+      <div className="border rounded-lg shadow-lg bg-light-base border-primary-accent/20">
         <table className="min-w-full text-sm">
           <thead>
-            <tr className="bg-gray-50">
-              <th className="px-3 py-2 text-left">Name</th>
-              <th className="px-3 py-2 text-left">Email</th>
-              <th className="px-3 py-2">Actions</th>
+            <tr className="border-b bg-primary-accent/10 border-primary-accent/20">
+              <th className="px-4 py-3 font-semibold text-left text-dark-base">
+                Name
+              </th>
+              <th className="px-4 py-3 font-semibold text-left text-dark-base">
+                Email
+              </th>
+              <th className="px-4 py-3 font-semibold text-center text-dark-base">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {rows.map((u) => (
-              <tr key={u._id} className="border-t">
-                <td className="px-3 py-2">{u.name}</td>
-                <td className="px-3 py-2">{u.email}</td>
-                <td className="px-3 py-2 text-center">
-                  <Button onClick={() => remove(u._id)} className="bg-red-600">
+              <tr key={u._id} className="border-b border-primary-accent/10">
+                <td className="px-4 py-3 text-dark-base">{u.name}</td>
+                <td className="px-4 py-3 text-dark-base">{u.email}</td>
+                <td className="px-4 py-3 text-center">
+                  <Button
+                    onClick={() => remove(u._id)}
+                    className="bg-red-600 hover:bg-red-700"
+                  >
                     Delete
                   </Button>
                 </td>
@@ -73,8 +82,8 @@ export default function Customers() {
             ))}
             {!rows.length && (
               <tr>
-                <td colSpan="3" className="px-3 py-4 text-center text-gray-500">
-                  No customers
+                <td colSpan="3" className="px-4 py-6 text-center text-dark-base/70">
+                  No customers found
                 </td>
               </tr>
             )}

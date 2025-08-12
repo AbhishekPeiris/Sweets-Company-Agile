@@ -5,36 +5,36 @@ export default function DataTable({
   actions,
 }) {
   return (
-    <div className="overflow-x-auto bg-white border rounded">
+    <div className="overflow-x-auto border rounded-lg shadow-lg bg-light-base border-primary-accent/20">
       <table className="min-w-full text-sm">
-        <thead className="bg-gray-50">
+        <thead className="border-b bg-primary-accent/10 border-primary-accent/20">
           <tr>
             {columns.map((c) => (
-              <th key={c.key} className="px-3 py-2 text-left">
+              <th key={c.key} className="px-4 py-3 font-semibold text-left text-dark-base">
                 {c.header}
               </th>
             ))}
-            {actions && <th className="px-3 py-2">Actions</th>}
+            {actions && <th className="px-4 py-3 font-semibold text-center text-dark-base">Actions</th>}
           </tr>
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r[rowKey]} className="border-t">
+            <tr key={r[rowKey]} className="border-b border-primary-accent/10">
               {columns.map((c) => (
-                <td key={c.key} className="px-3 py-2">
+                <td key={c.key} className="px-4 py-3 text-dark-base">
                   {c.render ? c.render(r) : r[c.key]}
                 </td>
               ))}
-              {actions && <td className="px-3 py-2">{actions(r)}</td>}
+              {actions && <td className="px-4 py-3 text-center">{actions(r)}</td>}
             </tr>
           ))}
           {!rows.length && (
             <tr>
               <td
-                className="px-3 py-6 text-center text-gray-500"
+                className="px-4 py-6 text-center text-dark-base/70"
                 colSpan={columns.length + 1}
               >
-                No data
+                No data available
               </td>
             </tr>
           )}
