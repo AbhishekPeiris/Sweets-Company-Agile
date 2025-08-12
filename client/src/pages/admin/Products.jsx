@@ -6,7 +6,7 @@ import products from "../../services/products.service.js";
 
 export default function Products() {
   const [rows, setRows] = useState([]);
-  const [form, setForm] = useState({ name: "", category: "", price: 0 });
+  const [form, setForm] = useState({ id: "",name: "", category: "", price: 0 });
 
   async function load() {
     const r = await products.list();
@@ -19,7 +19,7 @@ export default function Products() {
   async function create(e) {
     e.preventDefault();
     await products.create(form);
-    setForm({ name: "", category: "", price: 0 });
+    setForm({ id: "", name: "", category: "", price: 0 });
     load();
   }
   async function remove(id) {
@@ -73,6 +73,7 @@ export default function Products() {
       {/* Products Table */}
       <DataTable
         columns={[
+          { key: "_id", header: "# Product ID" },
           { key: "name", header: "🍬 Sweet Name" },
           { key: "category", header: "🎭 Category" },
           {

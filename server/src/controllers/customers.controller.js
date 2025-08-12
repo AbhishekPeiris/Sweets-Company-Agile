@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
 export async function createCustomer(req, res) {
-  const { name, email, password, phone, address } = req.body;
+  const { name, email, password = "temp123", phone, address } = req.body;
   if (!name || !email)
     return res.status(400).json({ message: "Missing fields" });
 
@@ -14,7 +14,7 @@ export async function createCustomer(req, res) {
     name,
     email,
     passwordHash,
-    role,
+    role: "customer",
     phone,
     address,
   });
