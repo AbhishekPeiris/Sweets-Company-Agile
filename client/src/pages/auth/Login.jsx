@@ -18,23 +18,28 @@ export default function Login() {
     try {
       const res = await authService.login({ email, password });
       login(res.token, res.user);
-      nav("/admin");
+      // nav("/admin");
+      if (res.user.role === "admin") {
+        nav("/admin");
+      } else {
+        nav("/");
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 bg-gradient-sweet relative overflow-hidden">
+    <div className="relative flex items-center justify-center min-h-screen px-4 overflow-hidden bg-gradient-sweet">
       {/* Floating decorations */}
-      <div className="absolute top-20 left-10 w-24 h-24 bg-rose/30 rounded-full animate-float blur-xl"></div>
-      <div className="absolute bottom-20 right-10 w-32 h-32 bg-lavender/40 rounded-full animate-bounce-gentle blur-2xl"></div>
+      <div className="absolute w-24 h-24 rounded-full top-20 left-10 bg-rose/30 animate-float blur-xl"></div>
+      <div className="absolute w-32 h-32 rounded-full bottom-20 right-10 bg-lavender/40 animate-bounce-gentle blur-2xl"></div>
 
       <form
         onSubmit={onSubmit}
         className="relative w-full max-w-lg p-12 border-4 shadow-2xl rounded-3xl bg-white/80 backdrop-blur-2xl border-white/50 animate-glow"
       >
-        <h2 className="mb-8 font-fancy text-4xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
+        <h2 className="mb-8 text-4xl font-black text-center text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
           ✨ Welcome Back ✨
         </h2>
         <div className="space-y-6">

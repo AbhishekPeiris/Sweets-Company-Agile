@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import { env } from "../config/env.js";
 
 export async function register(req, res) {
-  const { name, email, password, role = "customer", phone, address } = req.body;
+  const { name, email, password, role, phone, address } = req.body;
   if (!name || !email || !password)
     return res.status(400).json({ message: "Missing fields" });
 

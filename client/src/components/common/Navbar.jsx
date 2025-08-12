@@ -17,7 +17,7 @@ export default function Navbar() {
       <div className="absolute top-0 w-8 h-8 rounded-full left-20 bg-rose/20 animate-bounce-gentle blur-sm"></div>
       <div className="absolute top-0 w-6 h-6 rounded-full right-32 bg-lavender/30 animate-float blur-sm"></div>
 
-      <div className="flex items-center justify-between px-6 py-4 mx-auto max-w-7xl">
+      <div className="flex items-center justify-between max-w-full px-6 py-4 mx-auto">
         <Link
           to="/"
           className="flex items-center gap-3 text-3xl font-black transition-all duration-300 transform group font-fancy hover:scale-110"
@@ -57,12 +57,23 @@ export default function Navbar() {
         <div className="flex items-center space-x-4">
           {user ? (
             <>
-              <NavLink
-                to="/admin"
-                className="px-6 py-3 font-semibold transition-all duration-300 transform font-stylish hover:scale-105 text-dark-base hover:text-primary-accent"
-              >
-                👑 Admin
-              </NavLink>
+              {/* Show admin link only for admin users */}
+              {user.role === "admin" ? (
+                <NavLink
+                  to="/admin"
+                  className="px-6 py-3 font-semibold transition-all duration-300 transform font-stylish hover:scale-105 text-dark-base hover:text-primary-accent"
+                >
+                  👑 Admin
+                </NavLink>
+              ) : (
+                /* Show user name for customers */
+                <div className="flex items-center gap-2 px-6 py-3 border bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 rounded-2xl border-primary-accent/20">
+                  <span className="text-xl">👤</span>
+                  <span className="font-semibold font-stylish text-dark-base">
+                    Hello, {user.name}! ✨
+                  </span>
+                </div>
+              )}
               <button
                 onClick={logout}
                 className="px-6 py-3 font-semibold text-white transition-all duration-300 transform shadow-lg font-stylish hover:scale-105 rounded-2xl bg-gradient-to-r from-secondary-accent to-primary-accent hover:from-primary-accent hover:to-rose hover:shadow-xl animate-glow"
