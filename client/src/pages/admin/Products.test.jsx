@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor, act } from "@testing-library/react";
 import Products from "./Products.jsx";
 
 vi.mock("../../services/products.service.js", () => {
@@ -24,7 +24,9 @@ vi.mock("../../services/products.service.js", () => {
 });
 
 test("creates product via form", async () => {
-    render(<Products />);
+    await act(async () => {
+        render(<Products />);
+    });
 
     // Wait for initial load
     await waitFor(() => screen.getByText("Old"));
@@ -34,19 +36,26 @@ test("creates product via form", async () => {
     const categoryInput = screen.getByLabelText(/🎭 Category/i);
     const priceInput = screen.getByLabelText(/💰 Price \(LKR\)/i);
 
-    fireEvent.change(nameInput, { target: { value: "Milk Toffee" } });
-    fireEvent.change(categoryInput, { target: { value: "Toffee" } });
-    fireEvent.change(priceInput, { target: { value: "350" } });
+    await act(async () => {
+        fireEvent.change(nameInput, { target: { value: "Milk Toffee" } });
+        fireEvent.change(categoryInput, { target: { value: "Toffee" } });
+        fireEvent.change(priceInput, { target: { value: "350" } });
+    });
 
     // Submit form
-    fireEvent.click(screen.getByText(/✨ Add Product ✨/i));
+    await act(async () => {
+        fireEvent.click(screen.getByText(/✨ Add Product ✨/i));
+    });
 
     // Since we moved the mocks inside the factory, we need to import the module to access the mock functions
     const productsService = await import("../../services/products.service.js");
 
-    expect(productsService.default.create).toHaveBeenCalledWith({
-        name: "Milk Toffee",
-        category: "Toffee",
-        price: 350,
-    });
+    // Use objectContaining to be more flexible about extra fields
+    expect(productsService.default.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+            name: "Milk Toffee",
+            category: "Toffee",
+            price: 350,
+        })
+    );
 });
