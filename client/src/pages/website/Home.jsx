@@ -16,7 +16,7 @@ export default function Home() {
         <div className="w-full mx-auto max-w-8xl">
           <section className="grid items-center gap-20 lg:grid-cols-2">
             <div className="space-y-12 animate-float">
-              <div className="space-y-8">
+              <div className="-mt-20 space-y-8">
                 <div className="inline-flex items-center px-6 py-3 border rounded-full shadow-xl bg-white/20 backdrop-blur-lg border-white/30">
                   <span className="text-lg font-stylish text-dark-base animate-pulse">
                     ✨ Magical Sweet Experience ✨
@@ -29,7 +29,7 @@ export default function Home() {
                   </span>
                   <span className="block font-elegant text-7xl lg:text-8xl text-secondary-accent animate-bounce-gentle">
                     Dreams
-                  </span>
+                  </span><br />
                   <span className="block mt-4 text-4xl font-modern lg:text-5xl text-dark-base/80">
                     Come True ✨
                   </span>
