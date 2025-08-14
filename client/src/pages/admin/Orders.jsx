@@ -17,7 +17,7 @@ export default function Orders() {
     load();
   }
   async function cancel(id) {
-    await orders.cancel(id);
+    await orders.remove(id);
     load();
   }
 
