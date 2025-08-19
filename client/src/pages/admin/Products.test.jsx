@@ -34,7 +34,7 @@ test("creates product via form", async () => {
     // Find and fill form inputs
     const nameInput = screen.getByLabelText(/🏷️ Product Name/i);
     const categoryInput = screen.getByLabelText(/🎭 Category/i);
-    const priceInput = screen.getByLabelText(/💰 Price \(LKR\)/i);
+    const priceInput = screen.getByLabelText(/💰 Price \(AED\)/i);
 
     await act(async () => {
         fireEvent.change(nameInput, { target: { value: "Milk Toffee" } });

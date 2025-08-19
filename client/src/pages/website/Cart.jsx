@@ -171,7 +171,7 @@ export default function Cart() {
                                                 {item.name}
                                             </h3>
                                             <div className="text-lg text-transparent font-modern bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
-                                                LKR {item.price} each
+                                                AED {item.price} each
                                             </div>
                                         </div>
 
@@ -202,7 +202,7 @@ export default function Cart() {
 
                                     <div className="mt-4 text-right">
                                         <span className="text-xl font-bold text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
-                                            Subtotal: LKR {item.price * item.quantity}
+                                            Subtotal: AED {item.price * item.quantity}
                                         </span>
                                     </div>
                                 </div>
@@ -220,7 +220,7 @@ export default function Cart() {
                                 <div className="mb-6 space-y-4">
                                     <div className="flex items-center justify-between font-modern">
                                         <span className="text-dark-base">Items ({cartItems.reduce((total, item) => total + item.quantity, 0)}):</span>
-                                        <span className="font-bold text-dark-base">LKR {getTotalPrice()}</span>
+                                        <span className="font-bold text-dark-base">AED {getTotalPrice()}</span>
                                     </div>
                                     <div className="flex items-center justify-between font-modern">
                                         <span className="text-dark-base">Delivery:</span>
@@ -230,7 +230,7 @@ export default function Cart() {
                                         <div className="flex items-center justify-between">
                                             <span className="text-xl font-bold font-fancy text-dark-base">Total:</span>
                                             <span className="text-2xl font-bold text-transparent font-fancy bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
-                                                LKR {getTotalPrice()}
+                                                AED {getTotalPrice()}
                                             </span>
                                         </div>
                                     </div>
@@ -268,7 +268,7 @@ export default function Cart() {
                                             onChange={(e) => setOrderForm({ ...orderForm, contactPhone: e.target.value })}
                                             required
                                             className="w-full px-4 py-3 transition-all duration-300 border-2 rounded-2xl bg-white/70 border-primary-accent/30 focus:border-primary-accent focus:outline-none focus:ring-4 focus:ring-primary-accent/20 font-modern"
-                                            placeholder="070-0000000"
+                                            placeholder="05xxxxxxxxx"
                                         />
                                     </div>
 

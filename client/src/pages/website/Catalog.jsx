@@ -162,7 +162,7 @@ export default function Catalog() {
 
                       {/* Price */}
                       <div className="mb-6 text-2xl font-bold text-transparent font-modern bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
-                        LKR {product.price}
+                        AED {product.price}
                       </div>
 
                       {/* Action Button */}

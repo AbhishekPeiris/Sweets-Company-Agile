@@ -63,7 +63,7 @@ export default function Products() {
           placeholder="e.g., Cupcakes, Chocolates"
         />
         <Input
-          label="💰 Price (LKR)"
+          label="💰 Price (AED)"
           type="number"
           value={form.price}
           onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
@@ -86,7 +86,7 @@ export default function Products() {
             header: "💰 Price",
             render: (product) => (
               <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
-                LKR {product.price}
+                AED {product.price}
               </span>
             ),
           },

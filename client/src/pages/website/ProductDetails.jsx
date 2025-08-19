@@ -67,7 +67,7 @@ export default function ProductDetails() {
               </p>
 
               <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
-                LKR {product.price}
+                AED {product.price}
               </div>
 
               {/* Variants */}
@@ -79,8 +79,8 @@ export default function ProductDetails() {
                       key={variant}
                       onClick={() => setSelectedVariant(variant)}
                       className={`px-6 py-3 font-modern font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 ${selectedVariant === variant
-                          ? "bg-gradient-to-r from-primary-accent to-secondary-accent text-white shadow-xl animate-glow"
-                          : "bg-white/70 backdrop-blur-sm text-dark-base hover:bg-gradient-to-r hover:from-rose/20 hover:to-lavender/20 border-2 border-primary-accent/30"
+                        ? "bg-gradient-to-r from-primary-accent to-secondary-accent text-white shadow-xl animate-glow"
+                        : "bg-white/70 backdrop-blur-sm text-dark-base hover:bg-gradient-to-r hover:from-rose/20 hover:to-lavender/20 border-2 border-primary-accent/30"
                         }`}
                     >
                       {variant}
@@ -113,7 +113,7 @@ export default function ProductDetails() {
 
               {/* Add to Cart Button */}
               <button className="w-full px-8 py-6 text-2xl font-bold text-white transition-all duration-500 transform shadow-2xl font-fancy bg-gradient-to-r from-primary-accent to-secondary-accent rounded-2xl hover:shadow-primary-accent/50 hover:scale-105 animate-glow">
-                ✨ Add {quantity} to Cart - LKR {product.price * quantity} ✨
+                ✨ Add {quantity} to Cart - AED {product.price * quantity} ✨
               </button>
             </div>
           </div>
