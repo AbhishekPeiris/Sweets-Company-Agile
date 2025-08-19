@@ -157,9 +157,9 @@ export default function Contact() {
                         Visit Us
                       </h4>
                       <p className="font-modern text-dark-base/70">
-                        123 Sweet Dreams Lane
+                        Dubai 
                         <br />
-                        Candy Kingdom, CK 12345
+                        {/* Candy Kingdom, CK 12345 */}
                       </p>
                     </div>
                   </div>
@@ -173,7 +173,7 @@ export default function Contact() {
                         Call Us
                       </h4>
                       <p className="font-modern text-dark-base/70">
-                        070-0000000
+                        0565404971
                         <br />
                         1-800-SWEETS
                       </p>
@@ -189,9 +189,9 @@ export default function Contact() {
                         Email Us
                       </h4>
                       <p className="font-modern text-dark-base/70">
-                        hello@sweetempire.com
+                        {/* hello@sweetempire.com
                         <br />
-                        orders@sweetempire.com
+                        orders@sweetempire.com */}
                       </p>
                     </div>
                   </div>

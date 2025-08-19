@@ -1,6 +1,6 @@
-export function formatLKR(n) {
+export function formatAED(n) {
   return Number(n).toLocaleString("en-LK", {
     style: "currency",
-    currency: "LKR",
+    currency: "AED",
   });
 }

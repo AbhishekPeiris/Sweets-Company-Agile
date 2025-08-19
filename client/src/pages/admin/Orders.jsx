@@ -54,7 +54,7 @@ export default function Orders() {
                       <span className="font-semibold">{it.name}</span> x {it.qty}
                     </span>
                     <span className="font-bold text-transparent font-stylish bg-clip-text bg-gradient-to-r from-rose to-primary-accent">
-                      LKR {it.priceAtOrder * it.qty}
+                      AED {it.priceAtOrder * it.qty}
                     </span>
                   </li>
                 ))}
@@ -64,7 +64,7 @@ export default function Orders() {
             <div className="flex items-center justify-between p-4 mb-6 bg-gradient-to-r from-tertiary-accent/20 to-light-base/20 rounded-xl">
               <span className="text-xl font-bold font-fancy text-dark-base">💰 Total Amount:</span>
               <span className="text-2xl font-black text-transparent font-fancy bg-clip-text bg-gradient-to-r from-secondary-accent to-primary-accent">
-                LKR {o.total}
+                AED {o.total}
               </span>
             </div>
 
